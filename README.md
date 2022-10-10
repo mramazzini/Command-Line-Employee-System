@@ -36,5 +36,5 @@ N/A
 
 Any Questions? Contact me! 
 
-GitHub: github.com/mramazzini
+GitHub: [github.com/mramazzini](#github.com/mramazzini)
 Email: mramazzini123@gmail.com
