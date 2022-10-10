@@ -1,15 +1,13 @@
 const inquirer = require('inquirer');
-const express = require('express');
+
 const mysql = require('mysql2');
 const cTable = require('console.table');
 
 
-const app = express();
+
 const PORT = process.env.PORT || 3001;
 
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 
 const db = mysql.createConnection(
@@ -26,10 +24,8 @@ const db = mysql.createConnection(
 
 const menuOptions= ['View All Employees', 'Add Employee', 'Update Employee Role', 'View All Roles', 'Add Role', 'View All Departments', 'Add Department', 'Quit'];
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  openMenu();
-});
+openMenu();
+
 
 //Main menu
 function openMenu(){
@@ -44,7 +40,7 @@ function openMenu(){
         .then((res) => {
             let opt = res.option;
             const functions = {
-              0:viewEmployees, 1:addEmployee, 2:updateEmployeeRole, 3: viewAllRoles, 4:addRole, 5:viewAllDepartments, 6:addDepartment
+              0:viewEmployees, 1:addEmployee, 2:updateEmployeeRole, 3: viewAllRoles, 4:addRole, 5:viewAllDepartments, 6:addDepartment, 7:quit
             }
             for(let i = 0; i<menuOptions.length; i++){
               if(opt == menuOptions[i]){
@@ -54,6 +50,9 @@ function openMenu(){
               }
             }
           });
+}
+function quit(){
+  process.exit();
 }
 
 //Shows all databases joined together
