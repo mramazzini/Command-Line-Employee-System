@@ -18,7 +18,8 @@ Download the Repository. Make sure you have a mySQL account. Open the index.js F
 
 You simply use the arrow keys to run whichever command you want. 
 
-INPUT EXAMPLE IMAGES HERE
+https://user-images.githubusercontent.com/90007656/194953163-1e061c97-4525-4e69-b17e-7b36ca94e905.mp4
+
 
 ## Credits
 
