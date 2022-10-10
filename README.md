@@ -12,11 +12,11 @@ Table of Contents
 
 ## Installation
 
-Download the Repository. 
-Make sure you have a mySQL account.
-Open the index.js File and input your sql password in between the quotes on line 19, (where it says password). 
-Run the npm install to download the required packages. 
-Afterword, you can just run the application on your terminal by navigating to the folder directory and running 'node index.js'. 
+Download the Repository. \n
+Make sure you have a mySQL account. \n
+Open the index.js File and input your sql password in between the quotes on line 19, (where it says password). \n
+Run the npm install to download the required packages. \n
+Afterword, you can just run the application on your terminal by navigating to the folder directory and running 'node index.js'. \n
 
 ## Usage
 
