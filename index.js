@@ -3,6 +3,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cTable = require('console.table');
 
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -91,8 +92,7 @@ function addEmployee(){
           db.query('SELECT COUNT(id) FROM employee', function (err, results) {
             let newID = Object.values(results[0])[0]+1;
             db.query('INSERT INTO employee (id, role_id, first_name, last_name) VALUES ('+newID+', '+roleID+', "'+res.fname+'", "'+res.lname+'")', function (err, results) {
-              console.log('\n');
-              console.log('Successfully added new employee');
+              console.log('\nSuccessfully added new employee');
               viewEmployees();
             });
           });
@@ -101,7 +101,7 @@ function addEmployee(){
         }
       }
       
-      console.log('Failed to add new employee - Role does not exist');
+      console.log('\nFailed to add new employee - Role does not exist');
       openMenu();
     });
     
@@ -125,7 +125,7 @@ function updateEmployeeRole(){
   ])
   .then((res) => {
     if(!isNumeric(res.id)){
-      console.log('Failed to update employee - ID must be a number');
+      console.log('\nFailed to update employee - ID must be a number');
       openMenu();
       return;
   }
@@ -135,13 +135,14 @@ function updateEmployeeRole(){
         if(results[i].title == role){
           let roleID = results[i].id;
           db.query('UPDATE employee SET role_id = "'+roleID+'" WHERE id = '+res.id, function (err, results) {
-            console.log('\n');
-            console.log('Successfully updated employee role');
+            console.log(err);
+            console.log('\nSuccessfully updated employee role');
           });
           openMenu();
           return;
         }
       }
+      console.log('\nFailed to update employee - employee with ID:'+res.id+' does not exist')
       
   })
 })
@@ -183,7 +184,7 @@ function addRole(){
   .then((res) => {
     db.query('SELECT id, name FROM department', function (err, results) {
       if(!isNumeric(res.salary)){
-          console.log('Failed to add Role - Salary must be a number');
+          console.log('\nFailed to add Role - Salary must be a number');
           openMenu();
           return;
       }
@@ -194,7 +195,7 @@ function addRole(){
           db.query('SELECT COUNT(id) FROM role', function (err, results) {
             let newID = Object.values(results[0])[0]+1;
             db.query('INSERT INTO role (id, department_id, title, salary) VALUES ('+newID+', '+departmentID+', "'+res.role+'", '+res.salary+')', function (err, results) {
-              console.log('Successfully added role');
+              console.log('\nSuccessfully added role');
             });
           });
           openMenu();
@@ -203,7 +204,7 @@ function addRole(){
       }
 
       console.log('Failed to add role - Department does not exist');
-        openMenu();
+      openMenu();
   });
 })
 }
@@ -218,5 +219,25 @@ function viewAllDepartments(){
 }
 
 function addDepartment(){
-  
+  inquirer.prompt([
+    {
+      type: 'input',
+      message: 'What is the name of the new Department\n',
+      name: 'name'
+    }
+  ])
+  .then((res) => {
+    let name = res.name;
+    db.query('SELECT COUNT(id) FROM department', function (err, results) {
+      let newID = Object.values(results[0])[0]+1;
+      db.query('INSERT INTO department (id, name) VALUES ('+newID+', "'+name+'")', function (err, results) {
+        console.log(err);
+        console.log('\nSuccessfully added department');
+      });
+    });
+    
+    openMenu();
+
+  })
 }
+
